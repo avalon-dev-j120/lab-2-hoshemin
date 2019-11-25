@@ -1,9 +1,14 @@
 package ru.avalon.java.j20.labs.tasks;
 
+import java.io.BufferedReader;
 import ru.avalon.java.j20.labs.Task;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -19,10 +24,10 @@ public class Task3 implements Task {
      */
     @Override
     public void run() throws IOException {
-        File input = new File("assets/countries.txt");
-        File output = new File("countries_buffered_mode_output.txt");
-        Collection<String> lines = read(input);
-        write(output, lines);
+        File input = new File("in_task3");
+        File output = new File("out_task3");
+        Collection<String> buffer = read(input);
+        write(output, buffer);
 
         /*
          * TODO(Студент): Выполнить задание №3
@@ -52,7 +57,21 @@ public class Task3 implements Task {
      * @throws IOException в случае ошибок ввода-вывода.
      */
     private Collection<String> read(File file) throws IOException {
-        throw new UnsupportedOperationException("Not implement yet!");
+        FileReader fileReader = new FileReader(file);
+        Collection<String> buffer;
+        buffer = new ArrayList<>();
+        String data;
+        try (BufferedReader bufferedReader = new BufferedReader(fileReader)) {
+
+            while((data = bufferedReader.readLine()) != null)
+            {
+                buffer.add(data);
+            }
+
+        }
+        
+        return buffer;
+        //throw new UnsupportedOperationException("Not implement yet!");
     }
 
     /**
@@ -66,6 +85,12 @@ public class Task3 implements Task {
      * @throws IOException в случае ошибок ввода-вывода.
      */
     private void write(File file, Collection<String> collection) throws IOException {
-        throw new UnsupportedOperationException("Not implemented yet!");
+        //throw new UnsupportedOperationException("Not implemented yet!");
+        try(FileOutputStream f=new FileOutputStream(file);
+                PrintStream printStream = new PrintStream(f))
+        {
+            printStream.println(collection);
+
+        }
     }
 }

@@ -3,6 +3,8 @@ package ru.avalon.java.j20.labs.tasks;
 import ru.avalon.java.j20.labs.Task;
 
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 /**
@@ -18,8 +20,8 @@ public class Task2 implements Task {
      */
     @Override
     public void run() throws IOException {
-        File input = new File("assets/countries.txt");
-        File output = new File("countries_text_mode_output.txt");
+        File input = new File("in_task2");
+        File output = new File("out_task2");
         String text = read(input);
         write(output, text);
 
@@ -54,7 +56,19 @@ public class Task2 implements Task {
      * @throws IOException в случае ошибок ввода-вывода.
      */
     private String read(File file) throws IOException {
-        throw new UnsupportedOperationException("Not implement yet!");
+        StringBuilder strbuilder;
+        try (FileReader reader = new FileReader(file)) {
+            strbuilder = new StringBuilder();
+            char[] buffer = new char[1000];
+            int len;
+            while ((len = reader.read(buffer)) != -1) {
+                strbuilder.append(new String(buffer, 0, len));
+            }
+        }
+            return strbuilder.toString();
+        //throw new UnsupportedOperationException("Not implement yet!");
+        
+
     }
 
     /**
@@ -66,6 +80,8 @@ public class Task2 implements Task {
      * @throws IOException в случае ошибок ввода-вывода.
      */
     private void write(File file, String text) throws IOException {
-        throw new UnsupportedOperationException("Not implemented yet!");
+        FileWriter writer = new FileWriter(file);
+        writer.write(text);
+        //throw new UnsupportedOperationException("Not implemented yet!");
     }
 }
