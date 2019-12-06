@@ -58,9 +58,10 @@ public class Country {
      * имеет неверный формат.
      */
     public static Country valueOf(String text) throws ParseException {
+        return null;
         /*
          * TODO(Студент): Реализовать метод valueOf класса Country
          */
-        throw new UnsupportedOperationException("Not implemented yet!");
+        //throw new UnsupportedOperationException("Not implemented yet!");
     }
 }
